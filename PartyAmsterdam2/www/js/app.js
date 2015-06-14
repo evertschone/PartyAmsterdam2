@@ -1,0 +1,62 @@
+//angular.module('ionicApp', ['ionic'])
+
+window.ionic.Platform.ready(function() {
+    window.setTimeout(function(){
+    angular.bootstrap(document, ['ionicApp']);
+    }, 10);
+});
+
+angular.module('ionicApp', ['ionic', 'ionicApp.controllers', 'ionicApp.services'])
+
+.run(function($ionicPlatform) {
+
+  $ionicPlatform.ready(function() {
+    // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
+    // for form inputs)
+    if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
+      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+    }
+    if (window.StatusBar) {
+      // org.apache.cordova.statusbar required
+      StatusBar.styleLightContent();
+    }
+  });
+})
+
+.config(function($stateProvider, $urlRouterProvider) {
+
+    $stateProvider
+        .state('eventmenu', {
+            url: "/event",
+            abstract: true,
+            templateUrl: "templates/event-menu.html"
+        })
+        .state('eventmenu.home', {
+            url: "/home",
+            views: {
+                'menuContent': {
+                    templateUrl: "templates/home.html"
+                }
+            }
+        })
+        .state('eventmenu.checkin', {
+            url: "/check-in",
+            views: {
+                'menuContent': {
+                    templateUrl: "templates/check-in.html",
+                    controller: "CheckinCtrl"
+                }
+            }
+        })
+        .state('eventmenu.attendees', {
+            url: "/attendees",
+            views: {
+                'menuContent': {
+                    templateUrl: "templates/attendees.html",
+                    controller: "AttendeesCtrl"
+                }
+            }
+        })
+
+    $urlRouterProvider.otherwise("/event/home");
+});

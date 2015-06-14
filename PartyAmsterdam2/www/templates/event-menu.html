@@ -1,0 +1,54 @@
+<ion-side-menus enable-menu-with-back-views="true">
+    <ion-side-menu-content>
+        <ion-nav-bar class="bar-dark">
+            <ion-nav-back-button>
+            </ion-nav-back-button>
+            <ion-nav-buttons side="left">
+                <button class="button icon ion-funnel" menu-toggle="left">
+                </button>
+            </ion-nav-buttons>
+            <ion-nav-buttons side="right">
+                <button class="button icon ion-ios-star" menu-toggle="right">
+                </button>
+            </ion-nav-buttons>
+        </ion-nav-bar>
+        <ion-nav-view name="menuContent"></ion-nav-view>
+    </ion-side-menu-content>
+
+    <ion-side-menu side="left" class="side-menu" width="{{ maxwidth(46) }}" slide-along offset="-40">
+        <ion-header-bar class="bar-dark">
+            <h6 style="float:left; margin: 2px 4px; color: #fff;">{{results.lenght()+3}} parties match <br>your criteria.</h6>
+
+            <h2 class="title" style="float: right; left: -50px; right:0;">Search results <i class="ion-ios-arrow-forward ionicon"></i></h2>
+        </ion-header-bar>
+        <ion-content>
+            <ul class="list">
+                <!-- Note each link has the 'menu-close' attribute so the menu auto closes when clicking on one of these links -->
+                
+                <li class="item">
+                    <a href="#/event/check-in" class="item" menu-toggle="left">Check-in</a>
+                </li>
+                <li class="item">
+                    <a href="#/event/attendees" class="item" menu-toggle="left">Search</a>
+                </li>
+            </ul>
+        </ion-content>
+    </ion-side-menu>
+
+    <ion-side-menu side="right" class="side-menu" width="{{ maxwidth(46) }}" slide-along offset="-40">
+        <ion-header-bar class="bar-dark">
+            <h1 class="title">Favorites</h1>
+        </ion-header-bar>
+        <ion-content>
+            <ul class="list">
+                <!-- Note each link has NO 'menu-close' attribute BECAUSE HISTORY so the menu auto closes when clicking on one of these -->
+                <li class="item">
+                    <a href="#/event/check-in" class="item" menu-toggle="right">Check-in</a>
+                </li>
+                <li class="item">
+                    <a href="#/event/attendees" class="item" menu-toggle="right">Attendees</a>
+                </li>
+            </ul>
+        </ion-content>
+    </ion-side-menu>
+</ion-side-menus>
