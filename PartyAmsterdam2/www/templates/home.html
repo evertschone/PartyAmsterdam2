@@ -1,8 +1,40 @@
-<ion-view view-title="Welcome">
-    <ion-content class="padding">
-        <p>Click or swipe to the right to reveal the left menu.</p>
-        <p>(On desktop click and drag from left to right)</p>
-
-        - {{ maxwidth(40) }} - {{ maxwidth(0) }}
+<ion-view view-title="Amsterdam Party Guide">
+	<div class="bar bar-subheader bar-royal item-input-inset">
+	<label class="item-input-wrapper">
+	    <i class="icon ion-search placeholder-icon"></i>
+	    <input type="search" ng-model="$parent.$parent.query" placeholder="Search">
+	</label>
+	<button class="button button-clear">
+    	Cancel
+  	</button>
+	</div>
+<!-- 	<link ng-href="css/slideUpDown.css" rel="stylesheet" /> -->
+    <ion-content class="padding has-subheader" has-bouncing="1" locking="1" overflow-scroll="1">
+        <!-- <label class="item"> -->
+		    <button class="button button-block button-positive" ng-click="fbLogin()">
+		    Login with Facebook
+		    </button>
+		<!-- </label> -->
+		<p>
+		    Showing: {{(events | filter: query | rangeFilter : dateRange ).length }} events<span ng-show="dateRange.dateMin">, starting from: <a menu-toggle="left"><strong>{{dateRange.dateMin | date : 'MMMM d yyyy'}}</strong></a></span><span ng-show="dateRange.dateMax"> | to: <strong>{{dateRange.dateMax | date : 'MMMM d yyyy'}}</strong></span><span ng-show="query"> | containing: <strong>{{query}}</strong></span>
+	    </p>
+	    <ion-list >
+	      <ion-item ng-class="{'star': event.star}" 
+	      class="item-remove-animate item-thumbnail-left item-icon-right item-text-wrap" ng-repeat="event in events | filter: query | rangeFilter : dateRange | limitTo: 50" type="item-text-wrap" ng-href="#/app/event/{{event.title.__text}}">
+	        <img ng-src="{{fbEvent.picture.data.url}}" alt="{{ event.title.__text }}">
+	        <h2>{{event.title.__text}}</h2>
+	        <!-- UTC+2 waarschijnlijk weghalen, testen op mobiel met andere timezone -->
+	        <p>{{event.startdate.__text | date : 'EEEE, MMMM d, HH:mm' : 'UTC+0200' }} - {{event.enddate.__text | date : 'HH:mm'}}</p>
+	        <p ng-bind-html="event.summary.__text"></p>
+			<button class="button button-clear icon ion-star button-assertive" ng-click="toggleStar(event)" ng-show="event.star"></button>
+		    <ion-option-button class="button-dark" ng-click="toggleStar(event)">
+		    	<i class="icon ion-star"></i>
+		    </ion-option-button>
+	        <!-- <i class="icon ion-ios-star-outline"></i> -->
+<!-- 	        <ion-option-button class="button-assertive" ng-click="remove(event)">
+				  Delete
+				</ion-option-button> -->
+	      </ion-item>
+	    </ion-list>
     </ion-content>
 </ion-view>

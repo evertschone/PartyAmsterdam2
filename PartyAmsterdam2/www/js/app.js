@@ -1,25 +1,27 @@
 //angular.module('ionicApp', ['ionic'])
-
+// bootstrap Ionic only after loading the platform
 window.ionic.Platform.ready(function() {
     window.setTimeout(function(){
     angular.bootstrap(document, ['ionicApp']);
     }, 10);
 });
 
-angular.module('ionicApp', ['ionic', 'ionicApp.controllers', 'ionicApp.services'])
+angular.module('ionicApp', ['ionic', 'ionicApp.controllers', 'ionicApp.services', 'ngOpenFB'])
 
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform, ngFB) {
+    // inits facebook API with appID (dependancies are declared above)
+    ngFB.init({appId: '492752134210657'});
 
-  $ionicPlatform.ready(function() {
-    // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-    // for form inputs)
-    if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
-      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-    }
-    if (window.StatusBar) {
-      // org.apache.cordova.statusbar required
-      StatusBar.styleLightContent();
-    }
+    $ionicPlatform.ready(function() {
+        // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
+        // for form inputs)
+        if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
+            cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+        }
+        if (window.StatusBar) {
+            // org.apache.cordova.statusbar required
+            StatusBar.styleDefault();
+        }
   });
 })
 
@@ -27,15 +29,17 @@ angular.module('ionicApp', ['ionic', 'ionicApp.controllers', 'ionicApp.services'
 
     $stateProvider
         .state('eventmenu', {
-            url: "/event",
+            url: "/app",
             abstract: true,
-            templateUrl: "templates/event-menu.html"
+            templateUrl: "templates/event-menu.html",
+            controller: "ListCtrl"
         })
         .state('eventmenu.home', {
             url: "/home",
             views: {
                 'menuContent': {
-                    templateUrl: "templates/home.html"
+                    templateUrl: "templates/home.html",
+                    controller: "ListCtrl"
                 }
             }
         })
@@ -57,6 +61,15 @@ angular.module('ionicApp', ['ionic', 'ionicApp.controllers', 'ionicApp.services'
                 }
             }
         })
+        .state('eventmenu.event', {
+            url: "/event/:evId",
+            views: {
+                'menuContent': {
+                    templateUrl: "templates/eventdetail.html",
+                    controller: "ListCtrl"
+                }
+            }
+        })
 
-    $urlRouterProvider.otherwise("/event/home");
+    $urlRouterProvider.otherwise("/app/home");
 });

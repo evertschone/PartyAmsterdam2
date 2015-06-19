@@ -1,0 +1,21 @@
+<!--
+  This template loads for the 'app.eventdetail' state (app.js)
+  'friend' is a $scope variable created in the FriendsCtrl controller (controllers.js)
+  The FriendsCtrl pulls data from the Friends service (service.js)
+  The Friends service returns an array of friend data
+-->
+<ion-view view-title="{{whichevent}}">
+  <ion-content class="padding">            
+  {{query}}
+    <ion-list >
+        <ion-item class="item-thumbnail-left item-icon-right" ng-repeat="event in events | filter : whichevent" type="item-text-wrap">
+          <img ng-src="{{fbEvent.cover.data.url}}" style="width: 100%; height: auto">
+          <p>
+            {{event.title.__text}}
+          </p>
+          <p>{{event.startdate.__text | date : 'EEEE, MMMM d, HH:mm' : 'UTC+0200' }} - {{event.enddate.__text | date : 'HH:mm'}}</p>
+          <p></p>
+        </ion-item>
+      </ion-list>
+  </ion-content>
+</ion-view>

@@ -93,4 +93,5 @@
   <vs:plugin name="cordova-plugin-whitelist" version="1.0.1-dev" />
   <preference name="target-device" value="handset" />
   <preference name="deployment-target" value="5" />
+  <vs:plugin name="org.apache.cordova.inappbrowser" version="0.6.0" />
 </widget>

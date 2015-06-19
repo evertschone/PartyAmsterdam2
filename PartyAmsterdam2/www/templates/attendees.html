@@ -1,4 +1,5 @@
 <ion-view view-title="Event Attendees">
+<link ng-href="css/slideUpDown.css" rel="stylesheet" />
     <ion-content>
         <div class="list">
             <ion-toggle ng-repeat="attendee in attendees | orderBy:'firstname' | orderBy:'lastname'" ng-model="attendee.arrived" ng-change="arrivedChange(attendee)">

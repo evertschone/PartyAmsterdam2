@@ -1,35 +1,5 @@
 angular.module('ionicApp.services', [])
 
-
-.filter('escape', function(text) {
-  if (text) {
-    return text.
-        replace(/&/g, '&amp;').
-        replace(/</g, '&lt;').
-        replace(/>/g, '&gt;');
-  }
-  return '';
-})
-.filter('rangeFilter', function() {
-    return function( items, dateRange ) {
-        var filtered = [];
-        var min = dateRange.dateMin ? dateRange.dateMin : new Date("1899-12-31T23:00:00.000Z");
-        var max = dateRange.dateMax ? dateRange.dateMax : new Date("2100-12-30T23:00:00.000Z");
-        
-        // If time is with the range
-        angular.forEach(items, function(item) {
-
-        // Should prob. put this in the json, NewDate perforamnce?
-         var eventDate = (item.enddate !== undefined) ? new Date(item.enddate.__text) : new Date(item.startdate.__text)
-
-            if( eventDate >= min && eventDate <= max ) {
-                filtered.push(item);
-            }
-        });
-        return filtered;
-    };
-})
-
 .directive('slideAlong', function($timeout, $ionicSideMenuDelegate) {
     return  {
         link: function($scope, $element, $attrs) {
@@ -53,6 +23,7 @@ angular.module('ionicApp.services', [])
         }
     };
 })
+
 .factory('Events', ['$http',function($http){
    return {
        all: function(callback){
